@@ -1,0 +1,47 @@
+# 
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "field:esale_stock.hello,create_date:"
+msgid "Create Date"
+msgstr "Fecha creación"
+
+msgctxt "field:esale_stock.hello,create_uid:"
+msgid "Create User"
+msgstr "Usuario creación"
+
+msgctxt "field:esale_stock.hello,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "field:esale_stock.hello,name:"
+msgid "Name"
+msgstr "Nombre"
+
+msgctxt "field:esale_stock.hello,rec_name:"
+msgid "Name"
+msgstr "Nombre"
+
+msgctxt "field:esale_stock.hello,write_date:"
+msgid "Write Date"
+msgstr "Fecha modificación"
+
+msgctxt "field:esale_stock.hello,write_uid:"
+msgid "Write User"
+msgstr "Usuario modificación"
+
+msgctxt "field:product.template,esale_manage_stock:"
+msgid "Manage Stock"
+msgstr "Gestiona stock"
+
+msgctxt "field:sale.shop,esale_last_stock:"
+msgid "Last Stocks"
+msgstr "Últimos stocks exportados"
+
+msgctxt "help:product.template,esale_manage_stock:"
+msgid "Manage stock in e-commerce"
+msgstr "Gestionar el stock del producto en la plataforma e-commerce"
+
+msgctxt "help:sale.shop,esale_last_stock:"
+msgid "This date is last export (filter)"
+msgstr "La fecha de la última exportación (filtro)"
