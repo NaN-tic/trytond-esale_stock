@@ -97,3 +97,15 @@ class SaleShop:
 
             export_state = getattr(shop, 'export_stock_%s' % shop.esale_shop_app)
             export_state(shop, products)
+
+    @classmethod
+    def export_cron_stock(cls):
+        """
+        Cron export stock:
+        """
+        shops = cls.search([
+            ('esale_available', '=', True),
+            ('esale_scheduler', '=', True),
+            ])
+        cls.export_stock(shops)
+        return True
