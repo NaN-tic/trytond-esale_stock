@@ -13,7 +13,7 @@ __metaclass__ = PoolMeta
 
 class SaleShop:
     __name__ = 'sale.shop'
-    esale_last_stock = fields.DateTime('Last Stocks', 
+    esale_last_stocks = fields.DateTime('Last Stocks', 
         help='This date is last export (filter)')
 
     @classmethod
@@ -21,9 +21,10 @@ class SaleShop:
         super(SaleShop, cls).__setup__()
         cls._error_messages.update({
             'stock_not_export': 'Threre are not stock method to export',
+            'select_date_stocks': 'Select a date to export stocks',
         })
         cls._buttons.update({
-                'export_stock': {},
+                'export_stocks': {},
                 })
 
     @classmethod
@@ -72,31 +73,17 @@ class SaleShop:
             quantities = Product.get_quantity(products, name='forecast_quantity')
         return quantities
 
-    def export_stock_(self, shop):
-        """Export Stock
-        :param shop: Obj
-        """
-        self.raise_user_error('stock_not_export')
-
     @classmethod
     @ModelView.button
-    def export_stock(self, shops):
+    def export_stocks(self, shops):
         """
-        Export Stock to External APP
+        Export Stocks to External APP
         """
         for shop in shops:
-            now = datetime.datetime.now()
-            date = shop.esale_last_stock or now
-            products = self.get_product_from_move_and_date(shop, date)
-
-            #~ Update date last import
-            self.write([shop], {'esale_last_stock': now})
-
-            if not products:
-                return
-
-            export_state = getattr(shop, 'export_stock_%s' % shop.esale_shop_app)
-            export_state(shop, products)
+            if not shop.esale_last_stocks:
+                self.raise_user_error('select_date_stocks')
+            export_stocks = getattr(shop, 'export_stocks_%s' % shop.esale_shop_app)
+            export_stocks(shop)
 
     @classmethod
     def export_cron_stock(cls):
