@@ -3,49 +3,33 @@ msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
 msgctxt "error:sale.shop:"
+msgid "Select a date to export stocks"
+msgstr "Selecciona la data per exportar estocs"
+
+msgctxt "error:sale.shop:"
 msgid "Threre are not stock method to export"
 msgstr "No hi ha el mètode de exportar stock disponible"
-
-msgctxt "field:esale_stock.hello,create_date:"
-msgid "Create Date"
-msgstr "Data creació"
-
-msgctxt "field:esale_stock.hello,create_uid:"
-msgid "Create User"
-msgstr "Crear usuari"
-
-msgctxt "field:esale_stock.hello,id:"
-msgid "ID"
-msgstr "ID"
-
-msgctxt "field:esale_stock.hello,name:"
-msgid "Name"
-msgstr "Nom"
-
-msgctxt "field:esale_stock.hello,rec_name:"
-msgid "Name"
-msgstr "Nom"
-
-msgctxt "field:esale_stock.hello,write_date:"
-msgid "Write Date"
-msgstr "Data modificació"
-
-msgctxt "field:esale_stock.hello,write_uid:"
-msgid "Write User"
-msgstr "Usuari modificació"
 
 msgctxt "field:product.template,esale_manage_stock:"
 msgid "Manage Stock"
 msgstr "Gestiona estoc"
 
-msgctxt "field:sale.shop,esale_last_stock:"
-msgid "Last Stocks"
-msgstr "Últims stocks exportats"
+msgctxt "field:sale.shop,esale_last_stocks:"
+msgid ""
+msgstr ""
 
 msgctxt "help:product.template,esale_manage_stock:"
 msgid "Manage stock in e-commerce"
 msgstr "Es gestiona el estoc en la plataforma de e-commerce"
 
-msgctxt "help:sale.shop,esale_last_stock:"
-msgid "This date is last export (filter)"
-msgstr "La data de la última exportació (filtre)"
+msgctxt "help:sale.shop,esale_last_stocks:"
+msgid ""
+msgstr ""
+
+msgctxt "model:ir.cron,name:cron_esale_export_stock"
+msgid "eSale - Export Stock"
+msgstr "eSale - Exporta estoc"
+
+msgctxt "view:sale.shop:"
+msgid "Export Stock"
+msgstr "Exporta stock"
