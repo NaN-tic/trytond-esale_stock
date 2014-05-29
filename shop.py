@@ -94,5 +94,5 @@ class SaleShop:
             ('esale_available', '=', True),
             ('esale_scheduler', '=', True),
             ])
-        cls.export_stock(shops)
+        cls.export_stocks(shops)
         return True
