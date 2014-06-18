@@ -27,10 +27,8 @@ class SaleShop:
                 'export_stocks': {},
                 })
 
-    @classmethod
-    def get_product_from_move_and_date(self, shop, date):
+    def get_product_from_move_and_date(self, date):
         '''Get Products from a move and date to export
-        :param shop: obj
         :param date: datetime
         retun list
         '''
@@ -50,7 +48,7 @@ class SaleShop:
             ('id', 'in', map(int, [m.product.id for m in moves])),
             ])
         products_to_export = [product for product in products 
-                if shop in product.template.esale_saleshops]
+                if self in product.template.esale_saleshops]
         return products_to_export
 
     def get_esale_product_quantity(self, products):
