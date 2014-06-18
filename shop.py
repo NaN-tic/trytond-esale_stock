@@ -75,15 +75,15 @@ class SaleShop:
 
     @classmethod
     @ModelView.button
-    def export_stocks(self, shops):
+    def export_stocks(cls, shops):
         """
         Export Stocks to External APP
         """
         for shop in shops:
             if not shop.esale_last_stocks:
-                self.raise_user_error('select_date_stocks')
+                cls.raise_user_error('select_date_stocks')
             export_stocks = getattr(shop, 'export_stocks_%s' % shop.esale_shop_app)
-            export_stocks(shop)
+            export_stocks()
 
     @classmethod
     def export_cron_stock(cls):
