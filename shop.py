@@ -5,15 +5,13 @@ from trytond.model import ModelView, fields
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
 
-import datetime
-
 __all__ = ['SaleShop']
 __metaclass__ = PoolMeta
 
 
 class SaleShop:
     __name__ = 'sale.shop'
-    esale_last_stocks = fields.DateTime('Last Stocks', 
+    esale_last_stocks = fields.DateTime('Last Stocks',
         help='This date is last export (filter)')
 
     @classmethod
@@ -47,7 +45,7 @@ class SaleShop:
         products = Product.search([
             ('id', 'in', map(int, [m.product.id for m in moves])),
             ])
-        products_to_export = [product for product in products 
+        products_to_export = [product for product in products
                 if self in product.template.esale_saleshops]
         return products_to_export
 
@@ -68,7 +66,8 @@ class SaleShop:
         context = {}
         context['locations'] = [l.id for l in locations]
         with Transaction().set_context(context):
-            quantities = Product.get_quantity(products, name='forecast_quantity')
+            quantities = Product.get_quantity(products,
+                name='forecast_quantity')
         return quantities
 
     @classmethod
@@ -80,7 +79,8 @@ class SaleShop:
         for shop in shops:
             if not shop.esale_last_stocks:
                 cls.raise_user_error('select_date_stocks')
-            export_stocks = getattr(shop, 'export_stocks_%s' % shop.esale_shop_app)
+            export_stocks = getattr(shop,
+                'export_stocks_%s' % shop.esale_shop_app)
             export_stocks()
 
     @classmethod

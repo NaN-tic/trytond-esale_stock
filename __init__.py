@@ -5,6 +5,7 @@ from trytond.pool import Pool
 from .product import *
 from .shop import *
 
+
 def register():
     Pool.register(
         Template,
