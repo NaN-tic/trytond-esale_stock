@@ -10,4 +10,10 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
             <label name="esale_last_stocks"/>
             <field name="esale_last_stocks"/><newline/>
     </xpath>
+    <xpath
+        expr="/form/notebook/page[@id='esale']/notebook/page[@id='configuration']/notebook/page[@id='general']/field[@name='esale_timezone']"
+        position="after">
+            <label name="esale_forecast_quantity"/>
+            <field name="esale_forecast_quantity"/><newline/>
+    </xpath>
 </data>

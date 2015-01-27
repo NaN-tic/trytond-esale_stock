@@ -13,6 +13,7 @@ class SaleShop:
     __name__ = 'sale.shop'
     esale_last_stocks = fields.DateTime('Last Stocks',
         help='This date is last export (filter)')
+    esale_forecast_quantity = fields.Boolean('Forecast Quantity')
 
     @classmethod
     def __setup__(cls):
@@ -24,6 +25,10 @@ class SaleShop:
         cls._buttons.update({
                 'export_stocks': {},
                 })
+
+    @staticmethod
+    def default_esale_forecast_quantity():
+        return True
 
     def get_product_from_move_and_date(self, date):
         '''Get Products from a move and date to export
@@ -56,19 +61,10 @@ class SaleShop:
         return dict
         '''
         pool = Pool()
-        Location = pool.get('stock.location')
         Product = pool.get('product.product')
-
-        locations = Location.search([
-                ('type', '=', 'storage'),
-                ])
-
-        context = {}
-        context['locations'] = [l.id for l in locations]
-        with Transaction().set_context(context):
-            quantities = Product.get_quantity(products,
-                name='forecast_quantity')
-        return quantities
+        if not self.esale_forecast_quantity:
+            return Product.get_quantity(products, 'forecast_quantity')
+        return Product.get_esale_quantity(products, 'esale_forecast_quantity')
 
     @classmethod
     @ModelView.button
