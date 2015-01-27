@@ -12,7 +12,9 @@ class SaleShop:
     __name__ = 'sale.shop'
     esale_last_stocks = fields.DateTime('Last Stocks',
         help='This date is last export (filter)')
-    esale_forecast_quantity = fields.Boolean('Forecast Quantity')
+    esale_forecast_quantity = fields.Boolean('Forecast Quantity',
+        help='Product stock is Forecast Quantity. If is dissabled, ' \
+            'product stock is Quantity')
 
     @classmethod
     def __setup__(cls):
