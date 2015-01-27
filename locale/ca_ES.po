@@ -14,17 +14,21 @@ msgctxt "field:product.template,esale_manage_stock:"
 msgid "Manage Stock"
 msgstr "Gestiona estoc"
 
+msgctxt "field:sale.shop,esale_forecast_quantity:"
+msgid "Forecast Quantity"
+msgstr "Quantitat prevista"
+
 msgctxt "field:sale.shop,esale_last_stocks:"
-msgid ""
-msgstr ""
+msgid "Last Stocks"
+msgstr "Darrers estocs"
 
 msgctxt "help:product.template,esale_manage_stock:"
 msgid "Manage stock in e-commerce"
 msgstr "Es gestiona el estoc en la plataforma de e-commerce"
 
 msgctxt "help:sale.shop,esale_last_stocks:"
-msgid ""
-msgstr ""
+msgid "This date is last export (filter)"
+msgstr "La data de la última exportació (filtre)."
 
 msgctxt "model:ir.cron,name:cron_esale_export_stock"
 msgid "eSale - Export Stock"
