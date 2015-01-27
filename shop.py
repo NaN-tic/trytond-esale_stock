@@ -3,7 +3,6 @@
 # the full copyright notices and license terms.
 from trytond.model import ModelView, fields
 from trytond.pool import Pool, PoolMeta
-from trytond.transaction import Transaction
 
 __all__ = ['SaleShop']
 __metaclass__ = PoolMeta
@@ -60,11 +59,10 @@ class SaleShop:
         :param products: obj list
         return dict
         '''
-        pool = Pool()
-        Product = pool.get('product.product')
-        if not self.esale_forecast_quantity:
-            return Product.get_quantity(products, 'forecast_quantity')
-        return Product.get_esale_quantity(products, 'esale_forecast_quantity')
+        Product = Pool().get('product.product')
+        if self.esale_forecast_quantity:
+            return Product.get_esale_quantity(products, 'esale_forecast_quantity')
+        return Product.get_esale_quantity(products, 'esale_quantity')
 
     @classmethod
     @ModelView.button
