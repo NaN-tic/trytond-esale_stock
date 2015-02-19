@@ -20,7 +20,7 @@ msgstr "Cantidad prevista"
 
 msgctxt "field:sale.shop,esale_last_stocks:"
 msgid "Last Stocks"
-msgstr "Últimos estocs"
+msgstr "Últimos stocs"
 
 msgctxt "help:product.template,esale_manage_stock:"
 msgid "Manage stock in e-commerce"
