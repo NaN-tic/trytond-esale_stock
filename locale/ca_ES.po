@@ -45,3 +45,7 @@ msgstr "eSale - Exporta estoc"
 msgctxt "view:sale.shop:"
 msgid "Export Stock"
 msgstr "Exporta stock"
+
+msgctxt "view:sale.shop:"
+msgid "Stock"
+msgstr "Logística"
