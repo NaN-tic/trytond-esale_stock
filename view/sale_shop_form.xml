@@ -3,17 +3,14 @@
 The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
 <data>
     <xpath
-        expr="/form/notebook/page[@id='esale']/notebook/page[@id='catalog']/field[@name='esale_last_prices']"
+        expr="/form/notebook/page[@id='esale']/notebook/page[@id='actions']/notebook/page[@id='orders']"
         position="after">
-            <newline/>
-            <button name="export_stocks" string="Export Stock"/>
+        <page string="Logistics" id="logistics" col="6">
+            <button name="export_stocks" string="Export Stock" colspan="2"/>
             <label name="esale_last_stocks"/>
-            <field name="esale_last_stocks"/><newline/>
-    </xpath>
-    <xpath
-        expr="/form/notebook/page[@id='esale']/notebook/page[@id='configuration']/notebook/page[@id='general']/field[@name='esale_timezone']"
-        position="after">
+            <field name="esale_last_stocks"/>
             <label name="esale_forecast_quantity"/>
-            <field name="esale_forecast_quantity"/><newline/>
+            <field name="esale_forecast_quantity"/>
+        </page>
     </xpath>
 </data>
