@@ -52,7 +52,7 @@ class SaleShop:
             ('id', 'in', map(int, [m.product.id for m in moves])),
             ])
         products_to_export = [product for product in products
-                if self in product.template.esale_saleshops]
+                if self in product.template.shops]
         return products_to_export
 
     def get_esale_product_quantity(self, products):
