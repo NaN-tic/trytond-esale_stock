@@ -41,12 +41,12 @@ class SaleShop:
         Product = pool.get('product.product')
 
         # Get all moves from date and filter products by shop
-        moves = Move.search(['OR', [
-            ('shipment', 'like', 'stock.shipment.out%'),
-            ('shipment', 'like', 'stock.shipment.in%'),
-        ], [
-            ('write_date', '>=', date),
-        ]])
+        moves = Move.search([['OR',
+                ('write_date', '>=', date),
+                ('create_date', '>=', date)
+                ],
+            ('state', 'in', ['assigned', 'done']),
+            ])
 
         products = Product.search([
             ('id', 'in', map(int, [m.product.id for m in moves])),
