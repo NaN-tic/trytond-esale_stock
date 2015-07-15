@@ -3,6 +3,8 @@
 # the full copyright notices and license terms.
 from trytond.model import ModelView, fields
 from trytond.pool import Pool, PoolMeta
+from trytond.transaction import Transaction
+
 
 __all__ = ['SaleShop']
 __metaclass__ = PoolMeta
@@ -36,24 +38,33 @@ class SaleShop:
         :param date: datetime
         retun list
         '''
+        cursor = Transaction().cursor
         pool = Pool()
         Move = pool.get('stock.move')
         Product = pool.get('product.product')
+        Template = pool.get('product.template')
+        TemplateShop = pool.get('product.template-sale.shop')
 
         # Get all moves from date and filter products by shop
-        moves = Move.search([['OR',
-                ('write_date', '>=', date),
-                ('create_date', '>=', date)
-                ],
-            ('state', 'in', ['assigned', 'done']),
-            ])
+        move = Move.__table__()
+        product = Product.__table__()
+        template = Template.__table__()
+        template_shop = TemplateShop.__table__()
 
-        products = Product.search([
-            ('id', 'in', map(int, [m.product.id for m in moves])),
-            ])
-        products_to_export = [product for product in products
-                if self in product.template.shops]
-        return products_to_export
+        cursor.execute(*move
+            .join(product,
+                condition=move.product == product.id)
+            .join(template,
+                condition=product.template == template.id)
+            .join(template_shop,
+                condition=template_shop.template == template.id)
+            .select(product.id,
+                where=(template.esale_active)
+                    & (move.state.in_(('assigned', 'done')))
+                    & (template_shop.shop == self.id)
+                    & ((move.write_date >= date) | (move.create_date >= date)),
+                group_by=product.id))
+        return Product.browse([p[0] for p in cursor.fetchall()])
 
     def get_esale_product_quantity(self, products):
         '''
