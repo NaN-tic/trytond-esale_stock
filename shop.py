@@ -59,7 +59,8 @@ class SaleShop:
             .join(template_shop,
                 condition=template_shop.template == template.id)
             .select(product.id,
-                where=(template.esale_active)
+                where=(template.esale_available)
+                    & (template.esale_active)
                     & (move.state.in_(('assigned', 'done')))
                     & (template_shop.shop == self.id)
                     & ((move.write_date >= date) | (move.create_date >= date)),
