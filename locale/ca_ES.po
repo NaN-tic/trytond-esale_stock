@@ -1,6 +1,14 @@
-# 
+#
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "error:esale.export.stock:"
+msgid "Export product stocks %s IDs to %s shop"
+msgstr "S'ha exportat l'estoc de productes %s IDs a la botiga %s."
+
+msgctxt "error:esale.export.stock:"
+msgid "Install stock sync module to %s shop"
+msgstr "Instal·la el mòdul de sincronitzar stock per la botiga %s"
 
 msgctxt "error:sale.shop:"
 msgid "Select a date to export stocks"
@@ -9,6 +17,26 @@ msgstr "Selecciona la data per exportar estocs"
 msgctxt "error:sale.shop:"
 msgid "Threre are not stock method to export"
 msgstr "No hi ha el mètode de exportar stock disponible"
+
+msgctxt "field:esale.export.stock.result,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "field:esale.export.stock.result,info:"
+msgid "Info"
+msgstr "Info"
+
+msgctxt "field:esale.export.stock.start,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "field:esale.export.stock.start,shop:"
+msgid "Shop"
+msgstr "Botiga"
+
+msgctxt "field:esale.export.stock.start,shops:"
+msgid "Shops"
+msgstr "Botigues"
 
 msgctxt "field:product.template,esale_manage_stock:"
 msgid "Manage Stock"
@@ -21,6 +49,10 @@ msgstr "Quantitat prevista"
 msgctxt "field:sale.shop,esale_last_stocks:"
 msgid "Last Stocks"
 msgstr "Darrers estocs"
+
+msgctxt "help:esale.export.stock.start,shop:"
+msgid "Select shop will be export this product."
+msgstr "Selecciona la botiga per exportar aquests productes."
 
 msgctxt "help:product.template,esale_manage_stock:"
 msgid "Manage stock in e-commerce"
@@ -38,9 +70,29 @@ msgctxt "help:sale.shop,esale_last_stocks:"
 msgid "This date is last export (filter)"
 msgstr "La data de la última exportació (filtre)."
 
+msgctxt "model:esale.export.stock.result,name:"
+msgid "Export Tryton to External Shop: Result"
+msgstr "Exporta Tryton a botiga externa: resultat"
+
+msgctxt "model:esale.export.stock.start,name:"
+msgid "Export Tryton to External Shop: Start"
+msgstr "Exporta Tryton a botiga externa: inici"
+
+msgctxt "model:ir.action,name:wizard_esale_export_stock"
+msgid "Export Stock eSale"
+msgstr "Exporta estoc eSale"
+
 msgctxt "model:ir.cron,name:cron_esale_export_stock"
 msgid "eSale - Export Stock"
 msgstr "eSale - Exporta estoc"
+
+msgctxt "view:esale.export.stock.result:"
+msgid "eSale Clone"
+msgstr "Exporta eSale"
+
+msgctxt "view:esale.export.stock.start:"
+msgid "eSale Clone"
+msgstr "Exporta eSale"
 
 msgctxt "view:sale.shop:"
 msgid "Export Stock"
@@ -49,3 +101,15 @@ msgstr "Exporta stock"
 msgctxt "view:sale.shop:"
 msgid "Stock"
 msgstr "Logística"
+
+msgctxt "wizard_button:esale.export.stock,result,end:"
+msgid "Close"
+msgstr "Tanca"
+
+msgctxt "wizard_button:esale.export.stock,start,end:"
+msgid "Cancel"
+msgstr "Cancel·la"
+
+msgctxt "wizard_button:esale.export.stock,start,export:"
+msgid "Export"
+msgstr "Exporta"
