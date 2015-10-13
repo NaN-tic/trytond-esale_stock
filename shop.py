@@ -22,7 +22,7 @@ class SaleShop:
     def __setup__(cls):
         super(SaleShop, cls).__setup__()
         cls._error_messages.update({
-            'stock_not_export': 'Threre are not stock method to export',
+            'stock_not_export': 'Threre are not stock to export',
             'select_date_stocks': 'Select a date to export stocks',
         })
         cls._buttons.update({
@@ -102,3 +102,9 @@ class SaleShop:
             ])
         cls.export_stocks(shops)
         return True
+
+    def export_stocks_tryton(self, shop):
+        """Export Stocks to Tryton e-Sale
+        :param shop: Obj
+        """
+        self.raise_user_error('stock_not_export')

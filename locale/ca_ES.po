@@ -8,15 +8,15 @@ msgstr "S'ha exportat l'estoc de productes %s IDs a la botiga %s."
 
 msgctxt "error:esale.export.stock:"
 msgid "Install stock sync module to %s shop"
-msgstr "Instal·la el mòdul de sincronitzar stock per la botiga %s"
+msgstr "Instal·la el mòdul de sincronitzar estoc per la botiga %s"
 
 msgctxt "error:sale.shop:"
 msgid "Select a date to export stocks"
 msgstr "Selecciona la data per exportar estocs"
 
 msgctxt "error:sale.shop:"
-msgid "Threre are not stock method to export"
-msgstr "No hi ha el mètode de exportar stock disponible"
+msgid "Threre are not stock to export"
+msgstr "No hi ha estoc per exportar"
 
 msgctxt "field:esale.export.stock.result,id:"
 msgid "ID"
@@ -63,7 +63,7 @@ msgid ""
 "Product stock is Forecast Quantity. If is dissabled, product stock is "
 "Quantity"
 msgstr ""
-"El stock del producte és la quantitat prevista. En el cas que estigui "
+"L'estoc del producte és la quantitat prevista. En el cas que estigui "
 "desactivat és la quantitat real."
 
 msgctxt "help:sale.shop,esale_last_stocks:"
@@ -96,7 +96,7 @@ msgstr "Exporta eSale"
 
 msgctxt "view:sale.shop:"
 msgid "Export Stock"
-msgstr "Exporta stock"
+msgstr "Exporta estoc"
 
 msgctxt "view:sale.shop:"
 msgid "Stock"

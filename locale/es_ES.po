@@ -15,8 +15,8 @@ msgid "Select a date to export stocks"
 msgstr "Selecciona una fecha para exportar stocks"
 
 msgctxt "error:sale.shop:"
-msgid "Threre are not stock method to export"
-msgstr "No existe el método de stock para exportar."
+msgid "Threre are not stock to export"
+msgstr "No hay stock para exportar"
 
 msgctxt "field:esale.export.stock.result,id:"
 msgid "ID"
@@ -48,7 +48,7 @@ msgstr "Cantidad prevista"
 
 msgctxt "field:sale.shop,esale_last_stocks:"
 msgid "Last Stocks"
-msgstr "Últimos stocs"
+msgstr "Últimos stocks"
 
 msgctxt "help:esale.export.stock.start,shop:"
 msgid "Select shop will be export this product."
