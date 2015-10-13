@@ -2,12 +2,48 @@
 <!-- This file is part esale_stock module for Tryton.
 The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
 <tryton>
+    <data>
+        <record model="ir.ui.view" id="esale_export_stock_start">
+            <field name="model">esale.export.stock.start</field>
+            <field name="type">form</field>
+            <field name="name">esale_export_stock_start</field>
+        </record>
+        <record model="ir.ui.view" id="esale_export_stock_result">
+            <field name="model">esale.export.stock.result</field>
+            <field name="type">form</field>
+            <field name="name">esale_export_stock_result</field>
+        </record>
+
+        <!-- eSale Export Stock - Wizard -->
+        <record model="ir.action.wizard" id="wizard_esale_export_stock">
+            <field name="name">Export Stock eSale</field>
+            <field name="wiz_name">esale.export.stock</field>
+            <field name="model">product.template</field>
+        </record>
+        <record model="ir.action.keyword" id="esale_export_stock_keyword">
+            <field name="keyword">form_action</field>
+            <field name="model">product.template,-1</field>
+            <field name="action" ref="wizard_esale_export_stock"/>
+        </record>
+        <record model="ir.action-res.group"
+            id="action_group_wizard_esale_export_stock">
+            <field name="action" ref="wizard_esale_export_stock"/>
+            <field name="group" ref="esale.group_esale"/>
+        </record>
+    </data>
+
     <data depends="product_esale">
         <record model="ir.ui.view" id="esale_template_view_form">
             <field name="model">product.template</field>
             <field name="type">form</field>
             <field name="inherit" ref="product_esale.esale_template_view_form"/>
             <field name="name">esale_template_form</field>
+        </record>
+
+        <record model="ir.action-res.group"
+            id="action_group_wizard_esale_export_stock">
+            <field name="action" ref="wizard_esale_export_stock"/>
+            <field name="group" ref="product_esale.group_product_esale"/>
         </record>
     </data>
 </tryton>

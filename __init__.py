@@ -8,6 +8,11 @@ from .shop import *
 
 def register():
     Pool.register(
+        EsaleExportStockStart,
+        EsaleExportStockResult,
         Template,
         SaleShop,
         module='esale_stock', type_='model')
+    Pool.register(
+        EsaleExportStock,
+        module='esale_stock', type_='wizard')
