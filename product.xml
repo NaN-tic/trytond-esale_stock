@@ -41,7 +41,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
         </record>
 
         <record model="ir.action-res.group"
-            id="action_group_wizard_esale_export_stock">
+            id="action_group_wizard_product_esale_export_stock">
             <field name="action" ref="wizard_esale_export_stock"/>
             <field name="group" ref="product_esale.group_product_esale"/>
         </record>
