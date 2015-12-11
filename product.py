@@ -87,7 +87,6 @@ class EsaleExportStock(Wizard):
         else:
             self.result.info = self.raise_user_error('install_stock_sync',
                     (shop.rec_name), raise_exception=False)
-        print "fi"
         return 'result'
 
     def default_result(self, fields):
