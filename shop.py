@@ -38,7 +38,7 @@ class SaleShop:
         :param date: datetime
         retun list
         '''
-        cursor = Transaction().cursor
+        cursor = Transaction().connection.cursor()
         pool = Pool()
         Move = pool.get('stock.move')
         Product = pool.get('product.product')
