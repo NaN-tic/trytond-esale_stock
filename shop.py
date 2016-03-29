@@ -7,10 +7,10 @@ from trytond.transaction import Transaction
 
 
 __all__ = ['SaleShop']
-__metaclass__ = PoolMeta
 
 
 class SaleShop:
+    __metaclass__ = PoolMeta
     __name__ = 'sale.shop'
     esale_last_stocks = fields.DateTime('Last Stocks',
         help='This date is last export (filter)')

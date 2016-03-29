@@ -9,11 +9,10 @@ from trytond.pyson import Eval
 
 __all__ = ['Template', 'EsaleExportStockStart', 'EsaleExportStockResult',
     'EsaleExportStock']
-__metaclass__ = PoolMeta
 
 
 class Template:
-    "Product Template"
+    __metaclass__ = PoolMeta
     __name__ = 'product.template'
     esale_manage_stock = fields.Boolean('Manage Stock',
             help='Manage stock in e-commerce')
