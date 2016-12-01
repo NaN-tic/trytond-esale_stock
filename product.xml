@@ -30,6 +30,33 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
             <field name="action" ref="wizard_esale_export_stock"/>
             <field name="group" ref="esale.group_esale"/>
         </record>
+
+        <!-- Export Magento Product Stock CSV -->
+        <record model="ir.ui.view" id="esale_export_stock_csv_start">
+            <field name="model">esale.export.stock.csv.start</field>
+            <field name="type">form</field>
+            <field name="name">esale_export_stock_csv_start</field>
+        </record>
+        <record model="ir.ui.view" id="esale_export_stock_csv_result">
+            <field name="model">esale.export.stock.csv.result</field>
+            <field name="type">form</field>
+            <field name="name">esale_export_stock_csv_result</field>
+        </record>
+
+        <record model="ir.action.wizard" id="wizard_esale_export_stock_csv">
+            <field name="name">Export eSale Stock CSV</field>
+            <field name="wiz_name">esale.export.stock.csv</field>
+        </record>
+
+        <menuitem name="Export eSale Stock CSV"
+            parent="product.menu_main_product"
+            action="wizard_esale_export_stock_csv"
+            id="menu_esale_export_stock_csv"
+            sequence="20"/>
+        <record model="ir.ui.menu-res.group" id="menu_esale_export_stock_csv_group_esale">
+            <field name="menu" ref="menu_esale_export_stock_csv"/>
+            <field name="group" ref="esale.group_esale"/>
+        </record>
     </data>
 
     <data depends="product_esale">

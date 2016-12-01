@@ -10,9 +10,13 @@ def register():
     Pool.register(
         EsaleExportStockStart,
         EsaleExportStockResult,
+        EsaleExportStockCSVStart,
+        EsaleExportStockCSVResult,
         Template,
+        Product,
         SaleShop,
         module='esale_stock', type_='model')
     Pool.register(
         EsaleExportStock,
+        EsaleExportStockCSV,
         module='esale_stock', type_='wizard')
