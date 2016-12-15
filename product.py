@@ -12,11 +12,10 @@ from trytond.modules.product_esale.tools import slugify
 __all__ = ['Template', 'Product', 'EsaleExportStockStart', 'EsaleExportStockResult',
     'EsaleExportStock', 'EsaleExportStockCSVStart', 'EsaleExportStockCSVResult',
     'EsaleExportStockCSV']
-__metaclass__ = PoolMeta
 
 
 class Template:
-    "Product Template"
+    __metaclass__ = PoolMeta
     __name__ = 'product.template'
     esale_manage_stock = fields.Boolean('Manage Stock',
             help='Manage stock in e-commerce')
@@ -27,6 +26,7 @@ class Template:
 
 
 class Product:
+    __metaclass__ = PoolMeta
     __name__ = 'product.product'
 
     @classmethod
