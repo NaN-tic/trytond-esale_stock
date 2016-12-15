@@ -18,6 +18,30 @@ msgctxt "error:sale.shop:"
 msgid "Threre are not stock to export"
 msgstr "No hi ha estoc per exportar"
 
+msgctxt "field:esale.export.stock.csv.result,csv_file:"
+msgid "CSV"
+msgstr "CSV"
+
+msgctxt "field:esale.export.stock.csv.result,file_name:"
+msgid "File Name"
+msgstr "Nom fitxer"
+
+msgctxt "field:esale.export.stock.csv.result,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "field:esale.export.stock.csv.start,from_date:"
+msgid "From Date"
+msgstr "Data inicial"
+
+msgctxt "field:esale.export.stock.csv.start,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "field:esale.export.stock.csv.start,shop:"
+msgid "Shop"
+msgstr "Botiga"
+
 msgctxt "field:esale.export.stock.result,id:"
 msgid "ID"
 msgstr "ID"
@@ -50,6 +74,14 @@ msgctxt "field:sale.shop,esale_last_stocks:"
 msgid "Last Stocks"
 msgstr "Darrers estocs"
 
+msgctxt "help:esale.export.stock.csv.start,from_date:"
+msgid ""
+"Filter moves create/write from this date. An empty value are all catalog "
+"product."
+msgstr ""
+"Filtra moviments creats/modificats a partir d'aquesta data. Un valor nul és "
+"tot el catàleg de productes."
+
 msgctxt "help:esale.export.stock.start,shop:"
 msgid "Select shop will be export this product."
 msgstr "Selecciona la botiga per exportar aquests productes."
@@ -70,6 +102,14 @@ msgctxt "help:sale.shop,esale_last_stocks:"
 msgid "This date is last export (filter)"
 msgstr "La data de la última exportació (filtre)."
 
+msgctxt "model:esale.export.stock.csv.result,name:"
+msgid "eSale Export Stock CSV Result"
+msgstr "Resultat exporta eSale estoc"
+
+msgctxt "model:esale.export.stock.csv.start,name:"
+msgid "eSale Export Stock CSV Start"
+msgstr "Inici exporta eSale estoc"
+
 msgctxt "model:esale.export.stock.result,name:"
 msgid "Export Tryton to External Shop: Result"
 msgstr "Exporta Tryton a botiga externa: resultat"
@@ -82,9 +122,33 @@ msgctxt "model:ir.action,name:wizard_esale_export_stock"
 msgid "Export Stock eSale"
 msgstr "Exporta estoc eSale"
 
+msgctxt "model:ir.action,name:wizard_esale_export_stock_csv"
+msgid "Export eSale Stock CSV"
+msgstr "Exporta eSale estoc CSV"
+
 msgctxt "model:ir.cron,name:cron_esale_export_stock"
 msgid "eSale - Export Stock"
 msgstr "eSale - Exporta estoc"
+
+msgctxt "model:ir.ui.menu,name:menu_esale_export_stock_csv"
+msgid "Export eSale Stock CSV"
+msgstr "Exporta eSale estoc CSV"
+
+msgctxt "view:esale.export.stock.csv.result:"
+msgid "Export eSale CSV"
+msgstr "Exporta eSale CSV"
+
+msgctxt "view:esale.export.stock.csv.start:"
+msgid "Export eSale CSV"
+msgstr "Exporta eSale CSV"
+
+msgctxt "view:esale.export.stock.csv.start:"
+msgid "Export eSale stock to CSV file."
+msgstr "Exporta eSale estoc a fitxer CSV."
+
+msgctxt "view:esale.export.stock.csv.start:"
+msgid "Note that this operation may take a few minutes."
+msgstr "Tingueu en compte que aquesta operació pot trigar uns minuts."
 
 msgctxt "view:esale.export.stock.result:"
 msgid "eSale Clone"
@@ -111,5 +175,17 @@ msgid "Cancel"
 msgstr "Cancel·la"
 
 msgctxt "wizard_button:esale.export.stock,start,export:"
+msgid "Export"
+msgstr "Exporta"
+
+msgctxt "wizard_button:esale.export.stock.csv,result,end:"
+msgid "Close"
+msgstr "Tanca"
+
+msgctxt "wizard_button:esale.export.stock.csv,start,end:"
+msgid "Cancel"
+msgstr "Cancel·la"
+
+msgctxt "wizard_button:esale.export.stock.csv,start,export:"
 msgid "Export"
 msgstr "Exporta"
