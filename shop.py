@@ -34,7 +34,7 @@ class SaleShop:
         return True
 
     def get_product_from_move_and_date(self, date):
-        '''Get Products from a move and date to export
+        '''Get move products from a date to export
         :param date: datetime
         retun list
         '''

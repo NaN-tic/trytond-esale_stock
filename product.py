@@ -1,14 +1,17 @@
 # This file is part esale_stock module for Tryton.
 # The COPYRIGHT file at the top level of this repository contains
 # the full copyright notices and license terms.
+import datetime
 from trytond.model import ModelView, fields
 from trytond.pool import Pool, PoolMeta
 from trytond.wizard import Wizard, StateTransition, StateView, Button
 from trytond.transaction import Transaction
 from trytond.pyson import Eval
+from trytond.modules.product_esale.tools import slugify
 
-__all__ = ['Template', 'EsaleExportStockStart', 'EsaleExportStockResult',
-    'EsaleExportStock']
+__all__ = ['Template', 'Product', 'EsaleExportStockStart', 'EsaleExportStockResult',
+    'EsaleExportStock', 'EsaleExportStockCSVStart', 'EsaleExportStockCSVResult',
+    'EsaleExportStockCSV']
 
 
 class Template:
@@ -20,6 +23,32 @@ class Template:
     @staticmethod
     def default_esale_manage_stock():
         return True
+
+
+class Product:
+    __metaclass__ = PoolMeta
+    __name__ = 'product.product'
+
+    @classmethod
+    def esale_export_stock_csv(cls, shop, from_date):
+        'eSale Export Stock CSV'
+        products = shop.get_product_from_move_and_date(from_date)
+
+        product_domain = getattr(cls, '%s_product_domain' % shop.esale_shop_app)
+        domain = product_domain([shop.id])
+        domain += [['OR',
+                    ('create_date', '>=', from_date),
+                    ('write_date', '>=', from_date),
+                    ('template.create_date', '>=', from_date),
+                    ('template.write_date', '>=', from_date),
+                    ('id', 'in', [p.id for p in products]),
+                ]]
+
+        products = cls.search(domain)
+
+        export_csv = getattr(shop, 'esale_export_stock_csv_%s' % shop.esale_shop_app)
+        output = export_csv(products)
+        return output
 
 
 class EsaleExportStockStart(ModelView):
@@ -92,4 +121,68 @@ class EsaleExportStock(Wizard):
         info_ = self.result.info
         return {
             'info': info_,
+            }
+
+
+class EsaleExportStockCSVStart(ModelView):
+    'eSale Export Stock CSV Start'
+    __name__ = 'esale.export.stock.csv.start'
+    shop = fields.Many2One('sale.shop', 'Shop', required=True,
+        domain=[('esale_available', '=', True)])
+    from_date = fields.DateTime('From Date', required=True,
+        help='Filter moves create/write from this date. '
+        'An empty value are all catalog product.')
+
+    @staticmethod
+    def default_shop():
+        User = Pool().get('res.user')
+        user = User(Transaction().user)
+        return user.shop.id if user.shop else None
+
+    @staticmethod
+    def default_from_date():
+        return datetime.datetime.now()
+
+
+class EsaleExportStockCSVResult(ModelView):
+    'eSale Export Stock CSV Result'
+    __name__ = 'esale.export.stock.csv.result'
+    csv_file = fields.Binary('CSV', filename='file_name')
+    file_name = fields.Text('File Name')
+
+
+class EsaleExportStockCSV(Wizard):
+    'eSale Export Stock CSV'
+    __name__ = "esale.export.stock.csv"
+    start = StateView('esale.export.stock.csv.start',
+        'esale_stock.esale_export_stock_csv_start', [
+            Button('Cancel', 'end', 'tryton-cancel'),
+            Button('Export', 'export', 'tryton-ok', default=True),
+            ])
+    export = StateTransition()
+    result = StateView('esale.export.stock.csv.result',
+        'esale_stock.esale_export_stock_csv_result', [
+            Button('Close', 'end', 'tryton-close'),
+            ])
+
+    def transition_export(self):
+        pool = Pool()
+        Date = pool.get('ir.date')
+        Product = pool.get('product.product')
+
+        shop = self.start.shop
+        from_date = self.start.from_date
+
+        output = Product.esale_export_stock_csv(shop, from_date)
+
+        self.result.csv_file = fields.Binary.cast(output.getvalue())
+        self.result.file_name = '%s-stock-%s.csv' % (
+            slugify(shop.name.replace('.', '-')),
+            Date.today())
+        return 'result'
+
+    def default_result(self, fields):
+        return {
+            'csv_file': self.result.csv_file,
+            'file_name': self.result.file_name,
             }
