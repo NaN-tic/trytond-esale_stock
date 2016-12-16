@@ -34,8 +34,16 @@ class Product:
         'eSale Export Stock CSV'
         products = shop.get_product_from_move_and_date(from_date)
 
-        product_domain = getattr(cls, '%s_product_domain' % shop.esale_shop_app)
-        domain = product_domain([shop.id])
+        # get domain from esale APP or new domain
+        if shop.esale_shop_app:
+            product_domain = getattr(cls, '%s_product_domain' % shop.esale_shop_app)
+            domain = product_domain([shop.id])
+        else:
+            domain = [
+                ('esale_available', '=', True),
+                ('code', '!=', None),
+                ]
+
         domain += [['OR',
                     ('create_date', '>=', from_date),
                     ('write_date', '>=', from_date),
