@@ -145,7 +145,7 @@ class EsaleExportStockCSVStart(ModelView):
     def default_shop():
         User = Pool().get('res.user')
         user = User(Transaction().user)
-        return user.shop.id if user.shop else None
+        return user.shop.id if (user.shop and user.shop.esale_available) else None
 
     @staticmethod
     def default_from_date():
