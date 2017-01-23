@@ -16,6 +16,9 @@ class SaleShop:
     esale_forecast_quantity = fields.Boolean('Forecast Quantity',
         help='Product stock is Forecast Quantity. If is dissabled, ' \
             'product stock is Quantity')
+    esale_export_stock_filename = fields.Char('eSale Export Stock Filename',
+        help='Python expression that will be evaluated to generate the filename.\n'
+            'If is empty, export the filename as <shopname>-<locale>.csv.')
 
     @classmethod
     def __setup__(cls):
