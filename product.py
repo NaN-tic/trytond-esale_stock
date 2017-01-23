@@ -2,6 +2,7 @@
 # The COPYRIGHT file at the top level of this repository contains
 # the full copyright notices and license terms.
 import datetime
+from simpleeval import simple_eval
 from trytond.model import ModelView, fields
 from trytond.pool import Pool, PoolMeta
 from trytond.wizard import Wizard, StateTransition, StateView, Button
@@ -174,9 +175,7 @@ class EsaleExportStockCSV(Wizard):
             ])
 
     def transition_export(self):
-        pool = Pool()
-        Date = pool.get('ir.date')
-        Product = pool.get('product.product')
+        Product = Pool().get('product.product')
 
         shop = self.start.shop
         from_date = self.start.from_date
@@ -184,9 +183,14 @@ class EsaleExportStockCSV(Wizard):
         output = Product.esale_export_stock_csv(shop, from_date)
 
         self.result.csv_file = fields.Binary.cast(output.getvalue())
-        self.result.file_name = '%s-stock-%s.csv' % (
-            slugify(shop.name.replace('.', '-')),
-            Date.today())
+        if shop.esale_export_stock_filename:
+            context = shop.get_export_csv_context_formula()
+            filename = simple_eval(shop.esale_export_stock_filename, **context)
+        else:
+            filename = '%s-stock.csv' % (
+                slugify(shop.name.replace('.', '-')),
+                )
+        self.result.file_name = filename
         return 'result'
 
     def default_result(self, fields):
