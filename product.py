@@ -31,11 +31,10 @@ class Product:
     __name__ = 'product.product'
 
     @classmethod
-    def esale_export_stock_csv(cls, shop, from_date):
-        'eSale Export Stock CSV'
+    def esale_export_stock_domain(cls, shop, from_date):
+        'eSale Export Stock Domain'
         products = shop.get_product_from_move_and_date(from_date)
 
-        # get domain from esale APP or new domain
         if shop.esale_shop_app:
             product_domain = getattr(cls, '%s_product_domain' % shop.esale_shop_app)
             domain = product_domain([shop.id])
@@ -44,7 +43,6 @@ class Product:
                 ('esale_available', '=', True),
                 ('code', '!=', None),
                 ]
-
         domain += [['OR',
                     ('create_date', '>=', from_date),
                     ('write_date', '>=', from_date),
@@ -52,7 +50,12 @@ class Product:
                     ('template.write_date', '>=', from_date),
                     ('id', 'in', [p.id for p in products]),
                 ]]
+        return domain
 
+    @classmethod
+    def esale_export_stock_csv(cls, shop, from_date):
+        'eSale Export Stock CSV'
+        domain = cls.esale_export_stock_domain(shop, from_date)
         products = cls.search(domain)
 
         export_csv = getattr(shop, 'esale_export_stock_csv_%s' % shop.esale_shop_app)
