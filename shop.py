@@ -20,6 +20,9 @@ class SaleShop:
     esale_export_stock_filename = fields.Char('eSale Export Stock Filename',
         help='Python expression that will be evaluated to generate the filename.\n'
             'If is empty, export the filename as <shopname>-stock.csv.')
+    esale_product_move_stocks = fields.Boolean(
+        'Export Stocks from products and moves',
+        help='Export stock from products that have been edited and assigned/done moves')
 
     @classmethod
     def __setup__(cls):
@@ -34,6 +37,10 @@ class SaleShop:
 
     @staticmethod
     def default_esale_forecast_quantity():
+        return True
+
+    @staticmethod
+    def default_esale_product_move_stocks():
         return True
 
     def get_product_from_move_and_date(self, date):
