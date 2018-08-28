@@ -9,5 +9,12 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
             <field name="inherit" ref="sale_shop.sale_shop_view_form"/>
             <field name="name">sale_shop_form</field>
         </record>
+
+        <!-- buttons -->
+        <record model="ir.model.button" id="export_stocks_button">
+            <field name="name">export_stocks</field>
+            <field name="string">Export Stock</field>
+            <field name="model" search="[('model', '=', 'sale.shop')]"/>
+        </record>
     </data>
 </tryton>
