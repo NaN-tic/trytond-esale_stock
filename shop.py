@@ -9,8 +9,7 @@ from trytond.transaction import Transaction
 __all__ = ['SaleShop']
 
 
-class SaleShop:
-    __metaclass__ = PoolMeta
+class SaleShop(metaclass=PoolMeta):
     __name__ = 'sale.shop'
     esale_last_stocks = fields.DateTime('Last Stocks',
         help='This date is last export (filter)')

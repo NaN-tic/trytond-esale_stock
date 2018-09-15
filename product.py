@@ -15,8 +15,7 @@ __all__ = ['Template', 'Product', 'EsaleExportStockStart', 'EsaleExportStockResu
     'EsaleExportStockCSV']
 
 
-class Template:
-    __metaclass__ = PoolMeta
+class Template(metaclass=PoolMeta):
     __name__ = 'product.template'
     esale_manage_stock = fields.Boolean('Manage Stock',
             help='Manage stock in e-commerce')
@@ -26,8 +25,7 @@ class Template:
         return True
 
 
-class Product:
-    __metaclass__ = PoolMeta
+class Product(metaclass=PoolMeta):
     __name__ = 'product.product'
 
     @classmethod
