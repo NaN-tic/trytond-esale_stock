@@ -9,6 +9,9 @@ from trytond.wizard import Wizard, StateTransition, StateView, Button
 from trytond.transaction import Transaction
 from trytond.pyson import Eval
 from trytond.modules.product_esale.tools import slugify
+from trytond.exceptions import UserError
+from trytond.i18n import gettext
+
 
 __all__ = ['Template', 'Product', 'EsaleExportStockStart', 'EsaleExportStockResult',
     'EsaleExportStock', 'EsaleExportStockCSVStart', 'EsaleExportStockCSVResult',
@@ -93,13 +96,6 @@ class EsaleExportStock(Wizard):
             Button('Close', 'end', 'tryton-close'),
             ])
 
-    @classmethod
-    def __setup__(cls):
-        super(EsaleExportStock, cls).__setup__()
-        cls._error_messages.update({
-                'export_info': 'Export product stocks %s IDs to %s shop',
-                'install_stock_sync': 'Install stock sync module to %s shop',
-                })
 
     def default_start(self, fields):
         Template = Pool().get('product.template')
@@ -119,9 +115,13 @@ class EsaleExportStock(Wizard):
             export_status = getattr(shop, 'export_stocks_%s' % shop.esale_shop_app)
             templates = Transaction().context['active_ids']
             export_status(templates)
-            self.result.info = self.raise_user_error('export_info',
-                    (','.join(str(t) for t in templates), shop.rec_name),
-                    raise_exception=False)
+            try:
+                raise UserError(gettext('export_info',
+                        stocks=','.join(str(t) for t in templates),
+                        shop=shop.rec_name))
+            except UserError as e:
+                self.result.info = e
+
         else:
             self.result.info = self.raise_user_error('install_stock_sync',
                     (shop.rec_name), raise_exception=False)

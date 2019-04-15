@@ -4,6 +4,8 @@
 from trytond.model import ModelView, fields
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
+from trytond.exceptions import UserError
+from trytond.i18n import gettext
 
 
 __all__ = ['SaleShop']
@@ -26,10 +28,6 @@ class SaleShop(metaclass=PoolMeta):
     @classmethod
     def __setup__(cls):
         super(SaleShop, cls).__setup__()
-        cls._error_messages.update({
-            'stock_not_export': 'Threre are not stock to export',
-            'select_date_stocks': 'Select a date to export stocks',
-        })
         cls._buttons.update({
                 'export_stocks': {},
                 })
@@ -95,7 +93,7 @@ class SaleShop(metaclass=PoolMeta):
         """
         for shop in shops:
             if not shop.esale_last_stocks:
-                cls.raise_user_error('select_date_stocks')
+                raise UserError(gettext('select_date_stocks'))
             export_stocks = getattr(shop,
                 'export_stocks_%s' % shop.esale_shop_app)
             export_stocks()
@@ -116,4 +114,4 @@ class SaleShop(metaclass=PoolMeta):
         """Export Stocks to Tryton e-Sale
         :param shop: Obj
         """
-        self.raise_user_error('stock_not_export')
+        raise UserError(gettext('stock_not_export'))

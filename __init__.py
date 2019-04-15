@@ -4,10 +4,12 @@
 from trytond.pool import Pool
 from . import product
 from . import shop
+from . import esale
 
 
 def register():
     Pool.register(
+        esale.Cron,
         product.EsaleExportStockStart,
         product.EsaleExportStockResult,
         product.EsaleExportStockCSVStart,
