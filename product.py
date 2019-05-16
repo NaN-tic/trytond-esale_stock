@@ -13,9 +13,9 @@ from trytond.exceptions import UserError
 from trytond.i18n import gettext
 
 
-__all__ = ['Template', 'Product', 'EsaleExportStockStart', 'EsaleExportStockResult',
-    'EsaleExportStock', 'EsaleExportStockCSVStart', 'EsaleExportStockCSVResult',
-    'EsaleExportStockCSV']
+__all__ = ['Template', 'Product', 'EsaleExportStockStart',
+    'EsaleExportStockResult', 'EsaleExportStock', 'EsaleExportStockCSVStart',
+    'EsaleExportStockCSVResult', 'EsaleExportStockCSV']
 
 
 class Template(metaclass=PoolMeta):
@@ -37,7 +37,8 @@ class Product(metaclass=PoolMeta):
         products = shop.get_product_from_move_and_date(from_date)
 
         if shop.esale_shop_app:
-            product_domain = getattr(cls, '%s_product_domain' % shop.esale_shop_app)
+            attr = '%s_product_domain' % shop.esale_shop_app
+            product_domain = getattr(cls, attr)
             domain = product_domain([shop.id])
         else:
             domain = [
@@ -58,8 +59,8 @@ class Product(metaclass=PoolMeta):
         'eSale Export Stock CSV'
         domain = cls.esale_export_stock_domain(shop, from_date)
         products = cls.search(domain)
-
-        export_csv = getattr(shop, 'esale_export_stock_csv_%s' % shop.esale_shop_app)
+        attr = 'esale_export_stock_csv_%s' % shop.esale_shop_app
+        export_csv = getattr(shop, attr)
         output = export_csv(products)
         return output
 
@@ -96,7 +97,6 @@ class EsaleExportStock(Wizard):
             Button('Close', 'end', 'tryton-close'),
             ])
 
-
     def default_start(self, fields):
         Template = Pool().get('product.template')
         templates = Template.browse(Transaction().context['active_ids'])
@@ -112,19 +112,23 @@ class EsaleExportStock(Wizard):
     def transition_export(self):
         shop = self.start.shop
         if hasattr(shop, 'export_stocks_%s' % shop.esale_shop_app):
-            export_status = getattr(shop, 'export_stocks_%s' % shop.esale_shop_app)
+            attr = 'export_stocks_%s' % shop.esale_shop_app
+            export_status = getattr(shop, attr)
             templates = Transaction().context['active_ids']
             export_status(templates)
             try:
-                raise UserError(gettext('export_info',
+                raise UserError(gettext('esale_stock.export_info',
                         stocks=','.join(str(t) for t in templates),
                         shop=shop.rec_name))
             except UserError as e:
                 self.result.info = e
 
         else:
-            self.result.info = self.raise_user_error('install_stock_sync',
-                    (shop.rec_name), raise_exception=False)
+            try:
+                raise UserError(gettext('esale_stock.install_stock_sync',
+                        shop=shop.rec_name))
+            except UserError as e:
+                self.result.info = e
         return 'result'
 
     def default_result(self, fields):
@@ -147,7 +151,8 @@ class EsaleExportStockCSVStart(ModelView):
     def default_shop():
         User = Pool().get('res.user')
         user = User(Transaction().user)
-        return user.shop.id if (user.shop and user.shop.esale_available) else None
+        return user.shop.id if (user.shop and user.shop.esale_available) \
+            else None
 
     @staticmethod
     def default_from_date():
